@@ -2,9 +2,19 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+ 
 # C extensions
 *.so
+
+# Default ignored files
+/.idea/shelf/
+/.idea/workspace.xml
+# Editor-based HTTP Client requests
+/.idea/httpRequests/
+# Datasource local storage ignored files
+/.idea/dataSources/
+/.idea/dataSources.local.xml
+
 
 # Distribution / packaging
 .Python
@@ -106,10 +116,8 @@ ipython_config.py
 #pdm.lock
 #   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
 #   in version control.
-#   https://pdm.fming.dev/latest/usage/project/#working-with-version-control
+#   https://pdm.fming.dev/#use-with-ide
 .pdm.toml
-.pdm-python
-.pdm-build/
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
@@ -160,3 +168,9 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+.idea/.gitignore
+.idea/ftp-backend.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
