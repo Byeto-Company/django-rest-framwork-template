@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 #TODO update  telegram bot token
-TELEGRAM_BOT_TOKEN = ''
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 #TODO update email bullshit
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
