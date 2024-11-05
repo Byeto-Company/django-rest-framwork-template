@@ -169,10 +169,10 @@ Project Structure
 │   ├── settings.py       # Core settings
 │   ├── urls.py           # Project URLs
 │   ├── wsgi.py           # WSGI configuration
-│   ├── asgi.py           # ASGI configuration for async support
+│   └── asgi.py           # ASGI configuration for async support
 ├── apps/
-│   ├── <your_app>/       # Custom app with views, models, etc.
-│   └── utils.py          # Contains utility functions like pagination and email
+│   └── <your_app>/       # Custom app with views, models, etc.
+│       └── utils.py      # Contains utility functions like pagination and email
 ├── templates/            # HTML templates
 ├── static/               # Static files
 └── .env                  # Environment variables
