@@ -8,11 +8,11 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 
-
 #TODO CREATE A ENV WITH THIS NAME 
 load_dotenv(".env.local")
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+DOMAIN = os.getenv("DOMAIN")
+API_DOMAIN = os.getenv("API_DOMAIN")
 
 
 #TODO update  telegram bot token
@@ -30,11 +30,22 @@ DEFAULT_FROM_EMAIL = os.getenv("SECRET_KEY")
 
 
 SECRET_KEY = DEBUG = os.getenv("SECRET_KEY")
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+if not DEBUG:
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost', DOMAIN, API_DOMAIN]
+    CSRF_TRUSTED_ORIGINS = [
+    f"https://{DOMAIN}",
+    f"http://{DOMAIN}",
+    ]
+    CORS_ALLOWED_ORIGINS = [f"https://{API_DOMAIN}", f"http://{API_DOMAIN}",
+                        f"http://{DOMAIN}", f"https://{DOMAIN}",]
+else:
+    CORS_ALLOW_ALL_ORIGINS = True
 
-ALLOWED_HOSTS = []
+
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Application definition
@@ -183,30 +194,29 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=5000),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=5000),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=os.getenv("ACCESS_TOKEN_LIFETIME")),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=os.getenv("REFRESH_TOKEN_LIFETIME")),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
 }
 
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Byeto django core',
-    'DESCRIPTION': 'byeto DRF core ',
+    'TITLE': os.getenv("SITE_TITLE"),
+    'DESCRIPTION': os.getenv("SITE_TITLE"),
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     'COMPONENT_SPLIT_REQUEST': True 
 }
 
 
-CORS_ALLOWED_ORIGINS = []
 
 
 
 UNFOLD = {
-    "SITE_TITLE": "byeto django core",
-    "SITE_HEADER": "byeto django core",
-    "SITE_URL": "",
+    "SITE_TITLE": os.getenv("SITE_TITLE"),
+    "SITE_HEADER": os.getenv("SITE_HEADER"),
+    "SITE_URL": DOMAIN,
     "SITE_SYMBOL": "shield_person",
     "SITE_FAVICONS": [
         {
@@ -219,7 +229,6 @@ UNFOLD = {
     "SHOW_HISTORY": True,
     "SHOW_VIEW_ON_SITE": True,
     "ENVIRONMENT": "core.settings.environment_callback",
-    "THEME": "dark",
 
     "COLORS": {
         "font": {
@@ -230,19 +239,7 @@ UNFOLD = {
             "important-light": "17 24 39",
             "important-dark": "243 244 246",
         },
-        "primary": {
-            "50": "250 245 255",
-            "100": "243 232 255",
-            "200": "233 213 255",
-            "300": "216 180 254",
-            "400": "192 132 252",
-            "500": "168 85 247",
-            "600": "147 51 234",
-            "700": "126 34 206",
-            "800": "107 33 168",
-            "900": "88 28 135",
-            "950": "59 7 100",
-        },
+        "primary": os.getenv("THEME_COLOR"),
     },
     "EXTENSIONS": {
         "modeltranslation": {
