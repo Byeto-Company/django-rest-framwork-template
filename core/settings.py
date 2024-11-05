@@ -29,8 +29,8 @@ DEFAULT_FROM_EMAIL = os.getenv("SECRET_KEY")
 
 
 
-SECRET_KEY = DEBUG = os.getenv("SECRET_KEY")
-DEBUG = True
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG = os.getenv("DEBUG")
 if not DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1', 'localhost', DOMAIN, API_DOMAIN]
     CSRF_TRUSTED_ORIGINS = [
