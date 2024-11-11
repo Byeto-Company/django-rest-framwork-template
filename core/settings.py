@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 # TODO CREATE A ENV WITH THIS NAME
+### keep the .env name to .env.local if you want to change this name you should change it in here too when you load this env
 load_dotenv(".env.local")
 
 DOMAIN = os.getenv("DOMAIN")
