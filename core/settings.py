@@ -177,8 +177,8 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=os.getenv("ACCESS_TOKEN_LIFETIME")),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=os.getenv("REFRESH_TOKEN_LIFETIME")),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=int(os.getenv("ACCESS_TOKEN_LIFETIME"))),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=int(os.getenv("REFRESH_TOKEN_LIFETIME"))),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
 }
@@ -217,7 +217,18 @@ UNFOLD = {
             "important-light": "17 24 39",
             "important-dark": "243 244 246",
         },
-        "primary": os.getenv("THEME_COLOR"),
+        "primary": {
+            "50": "250 245 255",
+            "100": "243 232 255",
+            "200": "233 213 255",
+            "300": "216 180 254",
+            "400": "192 132 252",
+            "500": "168 85 247",
+            "600": "147 51 234",
+            "700": "126 34 206",
+            "800": "107 33 168",
+            "900": "88 28 135",
+            "950": "59 7 100"},
     },
     "EXTENSIONS": {
         "modeltranslation": {
