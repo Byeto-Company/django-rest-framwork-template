@@ -28,6 +28,10 @@ DEFAULT_FROM_EMAIL = os.getenv("SECRET_KEY")
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG")
+# in production lists of allowed hosts and allowed orgins will genrate
+# in development every host and orgin will be true
+# in prodcution it will use the postgres info you enterd in .env.local
+# in development it will use the sqlite 
 if not DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1', 'localhost', DOMAIN, API_DOMAIN]
     CSRF_TRUSTED_ORIGINS = [
@@ -36,8 +40,27 @@ if not DEBUG:
     ]
     CORS_ALLOWED_ORIGINS = [f"https://{API_DOMAIN}", f"http://{API_DOMAIN}",
                             f"http://{DOMAIN}", f"https://{DOMAIN}", ]
+
+    # database postgres
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv("DB_NAME"),
+            'USER': os.getenv("DB_USER"),
+            'PASSWORD': os.getenv("DB_PASSWORD"),
+            'HOST': os.getenv("DB_HOST"),
+            'PORT': os.getenv("DB_PORT"),
+        }
+    }
 else:
     CORS_ALLOW_ALL_ORIGINS = True
+    # sqlite database
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -103,25 +126,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    # database postgres
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv("DB_NAME"),
-            'USER': os.getenv("DB_USER"),
-            'PASSWORD': os.getenv("DB_PASSWORD"),
-            'HOST': os.getenv("DB_HOST"),
-            'PORT': os.getenv("DB_PORT"),
-        }
-    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -148,6 +152,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
