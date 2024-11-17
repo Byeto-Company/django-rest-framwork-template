@@ -32,6 +32,7 @@ DEBUG = os.getenv("DEBUG")
 # in development every host and orgin will be true
 # in prodcution it will use the postgres info you enterd in .env.local
 # in development it will use the sqlite 
+BASE_DIR = Path(__file__).resolve().parent.parent
 if not DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1', 'localhost', DOMAIN, API_DOMAIN]
     CSRF_TRUSTED_ORIGINS = [
@@ -62,7 +63,7 @@ else:
         }
     }
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 # Application definition
 
