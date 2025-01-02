@@ -27,7 +27,7 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("SECRET_KEY")
 
 SECRET_KEY = os.getenv("SECRET_KEY")
-DEBUG = os.getenv("DEBUG")
+DEBUG = True
 # in production lists of allowed hosts and allowed orgins will genrate
 # in development every host and orgin will be true
 # in prodcution it will use the postgres info you enterd in .env.local
@@ -38,6 +38,8 @@ if not DEBUG:
     CSRF_TRUSTED_ORIGINS = [
         f"https://{DOMAIN}",
         f"http://{DOMAIN}",
+        f"https://{API_DOMAIN}",
+        f"http://{API_DOMAIN}",
     ]
     CORS_ALLOWED_ORIGINS = [f"https://{API_DOMAIN}", f"http://{API_DOMAIN}",
                             f"http://{DOMAIN}", f"https://{DOMAIN}", ]
